@@ -1,0 +1,63 @@
+/* body {
+    background-color: pink;
+} */
+
+.container {
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    grid-gap: 50px;
+    justify-content: center;
+    /* align-items: center; */
+
+}
+
+img {
+    width: 180px;
+    border-radius: 50%;
+    margin-top: -1px;
+
+}
+
+.card {
+    height: 30rem;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.emp-description {
+    padding: 1em;
+    
+}
+
+.card .img-container {
+    text-align: center;
+}
+
+.btn {
+    margin: 2px 2px 1em 1em;
+    padding: 0 1rem;
+    border: none;
+    margin-bottom: 1em;
+}
+
+.empName {
+    text-align: center;
+    font-size: x-large;
+}
+
+p {
+    padding: 0 1rem;
+    font-size: large;
+}
+
+#crown {
+    text-align: right;
+}
+
+.employeebio {
+    margin-top: -1em;
+    overflow: auto;
+    height: 8em;
+}
