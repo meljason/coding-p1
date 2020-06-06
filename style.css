@@ -1,63 +1,115 @@
-/* body {
-    background-color: pink;
-} */
-
 .container {
-    display: grid;
-    grid-template-columns: 300px 300px 300px;
-    grid-gap: 50px;
-    justify-content: center;
-    /* align-items: center; */
-
+  margin: 0 auto;
+  max-width: 1000px;
 }
 
-img {
-    width: 180px;
-    border-radius: 50%;
-    margin-top: -1px;
+.filter {
+  margin-bottom: 3em;
+}
 
+.filter input {
+  width: 100%;
+  border: 2px solid black;
+  text-shadow: 0 0 2px black;
+  letter-spacing: 4px;
+  word-spacing: 10px;
+  border-radius: 10px;
+  height: 4em;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  font-family: sans-serif;
 }
 
 .card {
-    height: 30rem;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  background: #fafafa;
+  border: 1px solid black;
+  margin-bottom: 0;
+  width: 20em;
 }
 
-.emp-description {
-    padding: 1em;
-    
+.crown {
+  float: right;
+  margin: 0 !important;
+  padding: 3px 3px 0 0;
 }
 
-.card .img-container {
-    text-align: center;
+.card-img {
+  margin: 1.5em auto 1px;
+  display: block;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
 }
 
-.btn {
-    margin: 2px 2px 1em 1em;
-    padding: 0 1rem;
-    border: none;
-    margin-bottom: 1em;
+.card-content {
+  padding: 1em 1em 0 1em;
+  
 }
 
-.empName {
-    text-align: center;
-    font-size: x-large;
+.card-content .emp-name {
+  text-align: center;
+  font-weight: lighter;
 }
 
-p {
-    padding: 0 1rem;
-    font-size: large;
+.card-content p {
+  font-size: large;
 }
 
-#crown {
-    text-align: right;
+.emp-bio {
+  overflow-y: auto;
+  height: 10em;
 }
 
-.employeebio {
-    margin-top: -1em;
-    overflow: auto;
-    height: 8em;
+.tags {
+  display: flex;
+  bottom: 0 !important;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tags p {
+  margin-right: 5px;
+  padding: 0 1em 0;
+}
+
+/* scrollbar for tags*/
+#tags::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#tags::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#tags::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
+}
+/* scrollbar for bio */
+#emp-bio::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+#emp-bio::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#emp-bio::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+	border: 2px solid #555555;
 }

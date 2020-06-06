@@ -1,103 +1,124 @@
-// console.log("test");
+//pagination
+// const listCardEmployees = document.getElementById("cards");
+// const paginationElement = document.getElementById("pagination");
 
-"use strict";
+// let currentPage = 1;
+// let rows = 3;
 
-const employeeUrl =
-  "http://sandbox.bittsdevelopment.com/code1/fetchemployees.php/";
+// function DisplayElements(items, wrapper, rows_per_page, page) {
+//   wrapper.innerHTML = "";
+//   page--;
 
-async function getAllEmployee() {
-  const response = await fetch(employeeUrl);
-  const data = await response.json();
+//   let loopStart = rows_per_page * page;
+//   let paginatedItems = items.slice(loopStart, loopStart+ rows_per_page);
+//   console.log(paginatedItems);
+//   for(let i = loopStart; i < loopStart + rows_per_page; i++) {
 
-  // document.getElementById("empName").textContent = data[1].employeefname;
-  // console.log(data);
+//   }
+// }
 
-  var keyEmployee = Object.keys(data);
 
-  // console.log((data[2].roles.length));
+// DisplayElements(list)
+const employeeURL =
+  "http://sandbox.bittsdevelopment.com/code1/fetchemployees.php";
+const employeeImageURL =
+  "http://sandbox.bittsdevelopment.com/code1/employeepics/";
+const employeeRolesURL =
+  "http://sandbox.bittsdevelopment.com/code1/fetchroles.php";
 
-  // console.log(keyEmployee.length);
+//query selectors
+const employeeListSelector = document.querySelector(".cards");
 
-  //   console.log(data[1].employeeisfeatured)
+//filter search------------------------------------------------------------------
+let filterInput = document.getElementById("filter-input");
+filterInput.addEventListener("keyup", filterEmployees);
 
-  console.log(data[2].roles[0].rolecolor);
+function filterEmployees() {
+  //getting the value of the input
+  let filterValue = document.getElementById("filter-input").value.toUpperCase();
+  
+  //getting employee items
+  let employeeContent = employeeListSelector.querySelectorAll('div.card-content');
 
-  for (var i = 0; i < keyEmployee.length; i++) {
-    var idCount = i + 1;
+  console.log(employeeContent);
 
+  //loop through emp-name
+  for(let i = 0; i < employeeListSelector.length; i++) {
+    let nameTag = employeeContent[i].getElementsByTagName('h2')[0];
+
+    if(nameTag[i].innerHTML.indexOf(filterValue) > -1) {
+      employeeContent.style.display = '';
+    } else {
+      employeeContent.style.display = 'none';
+    }
+  }
+}
+
+//-------------------------------------------------------------------------------
+
+async function getEmployeeList() {
+  //employee list fetch
+  const employeeListResponse = await fetch(employeeURL);
+  const employeeListJson = await employeeListResponse.json();
+
+  //employee role fetch
+  const employeeRoleResponse = await fetch(employeeRolesURL);
+  const employeeRoleJson = await employeeRoleResponse.json();
+
+  var employeeListArray = [];
+
+  for (var i in employeeListJson)
+    employeeListArray.push([i, employeeListJson[i]]);
+
+  employeeListArray.forEach((employeeItem) => {
     function roles() {
       var values = [];
-      for (var j = 0; j < data[idCount].roles.length; j++) {
-        // console.log(data[idCount].roles[j].rolename);
-
-        // values.push(data[idCount].roles[j].rolename);
+      for (var j = 0; j < employeeListJson[employeeItem[0]].roles.length; j++) {
         values.push(
-          '<button class="btn" style="background-color:' +
-            data[idCount].roles[j].rolecolor +
+          '<p style="background-color:' +
+            employeeListJson[employeeItem[0]].roles[j].rolecolor +
             '">' +
-            data[idCount].roles[j].rolename +
-            "</button>"
+            employeeListJson[employeeItem[0]].roles[j].rolename +
+            "</p>"
         );
-        //   '<button class="btn" style="background-color:'+ data[idCount].roles[j].rolecolor +'">' + data[idCount].roles[j].rolename + "</button>" +
-        //   '<button class="btn" style="background-color:'+ data[idCount].roles[j].rolecolor +'">' + data[idCount].roles[j].rolename + "</button>"
       }
       return values.join("");
     }
 
-    console.log(roles());
-
-    function btnColor() {
-      var values = [];
-      for (var k = 0; k < data[idCount].roles.length; k++) {
-        // console.log(data[idCount].roles[k].rolecolor);
-        values.push(data[idCount].roles[k].rolecolor);
-      }
-      return values;
-    }
-
-    //decide if the employee is featured or not
     function crown() {
       var crown = "👑";
 
-      if (data[idCount].employeeisfeatured == 1) {
+      if (employeeListJson[employeeItem[0]].employeeisfeatured == 1) {
         return crown;
       } else {
         return "";
       }
     }
 
-    //declaring card html
-    let html_employee =
-      '<div class="card">' +
-      '<p id="crown">' +
-      crown() +
-      "</p>" +
-      '<div class="img-container">' +
-      '<img src="' +
-      "http://sandbox.bittsdevelopment.com/code1/employeepics/" +
-      data[idCount].employeeid +
-      ".jpg" +
-      '" alt="">' +
-      "</div>" +
-      '<p class="empName" id="empName">' +
-      data[idCount].employeefname +
-      " " +
-      data[idCount].employeelname +
-      "</p>" +
-      '<p class="employeebio">' +
-      data[idCount].employeebio +
-      "</p>" +
-      '<div class="grid-container">' +
-      roles() +
-      "</button>" +
-      "</div>" +
-      "</div>";
-
-    document.getElementById("employee").innerHTML += html_employee;
-    // document.write(html_employee);
-
-    // console.log(i + 1);
-  }
+    employeeListSelector.innerHTML += `
+    <div class="card">
+      <p class="crown">${crown()}</p>
+      <img
+        src="${employeeImageURL + employeeItem[0] + ".jpg"}"
+        alt="Employee Profile Picture"
+        class="card-img"
+      />
+      <div class="card-content">
+        <h2 class="emp-name">${
+          employeeListJson[employeeItem[0]].employeefname +
+          " " +
+          employeeListJson[employeeItem[0]].employeelname
+        }</h2>
+        <p class="emp-bio" id="emp-bio">
+          ${employeeListJson[employeeItem[0]].employeebio}
+        </p>
+        <div class="tags" id="tags">
+          ${roles()}
+        </div>
+      </div>
+    </div>
+    `;
+  });
 }
 
-getAllEmployee();
+getEmployeeList();

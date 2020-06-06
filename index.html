@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Coding interview part 1</title>
-</head>
-<body>
-    <h1>Team Members</h1>
-
-    <div class="container" id = "employee">
-        
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>List of Employee</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="filter">
+        <form id="search-employee">
+          <input type="text" id="filter-input" placeholder="search employee...">
+        </form>
+      </div>
+      <div class="cards" id="cards"></div>
+      <div class="pagenumbers" id="pagination"></div>
     </div>
-</body>
     <script src="app.js"></script>
+  </body>
 </html>
