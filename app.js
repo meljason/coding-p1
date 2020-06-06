@@ -1,21 +1,3 @@
-//pagination
-// const listCardEmployees = document.getElementById("cards");
-// const paginationElement = document.getElementById("pagination");
-
-// let currentPage = 1;
-// let rows = 3;
-
-// function DisplayElements(items, wrapper, rows_per_page, page) {
-//   wrapper.innerHTML = "";
-//   page--;
-
-//   let loopStart = rows_per_page * page;
-//   let paginatedItems = items.slice(loopStart, loopStart+ rows_per_page);
-//   console.log(paginatedItems);
-//   for(let i = loopStart; i < loopStart + rows_per_page; i++) {
-
-//   }
-// }
 
 
 // DisplayElements(list)
@@ -36,20 +18,22 @@ filterInput.addEventListener("keyup", filterEmployees);
 function filterEmployees() {
   //getting the value of the input
   let filterValue = document.getElementById("filter-input").value.toUpperCase();
-  
+
   //getting employee items
-  let employeeContent = employeeListSelector.querySelectorAll('div.card-content');
+  let employeeContent = employeeListSelector.querySelectorAll(
+    "div.card-content"
+  );
 
   console.log(employeeContent);
 
   //loop through emp-name
-  for(let i = 0; i < employeeListSelector.length; i++) {
-    let nameTag = employeeContent[i].getElementsByTagName('h2')[0];
+  for (let i = 0; i < employeeListSelector.length; i++) {
+    let nameTag = employeeContent[i].getElementsByTagName("h2")[0];
 
-    if(nameTag[i].innerHTML.indexOf(filterValue) > -1) {
-      employeeContent.style.display = '';
+    if (nameTag[i].innerHTML.indexOf(filterValue) > -1) {
+      employeeContent.style.display = "";
     } else {
-      employeeContent.style.display = 'none';
+      employeeContent.style.display = "none";
     }
   }
 }
@@ -122,3 +106,10 @@ async function getEmployeeList() {
 }
 
 getEmployeeList();
+
+const employeeList = document.querySelector(".cards");
+const first = document.querySelector(".first");
+const previous = document.querySelector(".previous");
+const next = document.querySelector(".next");
+const last = document.querySelector(".last");
+
